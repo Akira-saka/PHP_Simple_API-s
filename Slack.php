@@ -13,12 +13,12 @@ class Slack
 
     function __construct() {
         $this->start_message = "Message for Me!";
-        $this->slack_id = "<@U01260D3HMG>";
-        $this->webhook_url = "https://hooks.slack.com/services/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";
-        $this->google_calender = "https://calendar.google.com/calendar/r";
-        $this->trello = "https://trello.com/b/x7E1lW49/%E8%87%AA%E5%88%86%E3%81%AE%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86";
-        $this->manaba_url = "https://mgu.manaba.jp/ct/home_course";
-        $this->university_name = "明治学院";
+        $this->slack_id = "xxxxxx";
+        $this->webhook_url = "xxxxxx";
+        $this->google_calender = "xxxxxx";
+        $this->trello = "xxxxxx";
+        $this->manaba_url = "xxxxxx";
+        $this->university_name = "xxxxxx";
         $this->end_message = "Fighet!";
     }
 
