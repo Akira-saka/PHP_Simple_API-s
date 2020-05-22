@@ -22,7 +22,7 @@ class Google
 
     function createService()
     {
-        $my_json_key = "xxxxxx";
+        $my_json_key = "xxxxx";
         $this->client->setApplicationName('カレンダー操作テスト イベントの取得');
         // 予定を取得する時は Google_Service_Calendar::CALENDAR_READONLY
         // 予定を追加する時は Google_Service_Calendar::CALENDAR_EVENTS
@@ -42,7 +42,7 @@ class Google
             'maxResults' => 5,
             'orderBy' => 'startTime',
             'singleEvents' => true,
-            'timeMin' => date('c', strtotime(date("Y-m-d"))),
+            'timeMin' => date('c', strtotime(date("Y-m-d\TH:i"))),
         );
         $result = $service->events->listEvents(calendar_id, $options);
         $schedules = $result->getItems();

@@ -12,9 +12,9 @@ class Slack
 
     function __construct()
     {
-        $this->slack_id = "xxxxx";
+        $this->slack_id = "xxxxx>";
         $this->google_calender = "xxxxx";
-        $this->trello = "xxxxxx";
+        $this->trello = "xxxxx";
         $this->manaba_url = "xxxxx";
         $this->university_name = "xxxxx";
     }
