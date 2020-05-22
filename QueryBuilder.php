@@ -10,9 +10,9 @@ class QueryBuilder
 
     function __construct()
     {
-        $this->dsn = "mysql:host=localhost;dbname=API";
-        $this->username = "takuma";
-        $this->pwd = "taco85107";
+        $this->dsn = "xxxxx";
+        $this->username = "xxxxxx";
+        $this->pwd = "xxxxx";
     }
 
     function connectPdo()

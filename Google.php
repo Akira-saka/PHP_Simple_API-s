@@ -22,7 +22,7 @@ class Google
 
     function createService()
     {
-        $my_json_key = "my-api-project-278010-a976b976beaa.json";
+        $my_json_key = "xxxxxx";
         $this->client->setApplicationName('カレンダー操作テスト イベントの取得');
         // 予定を取得する時は Google_Service_Calendar::CALENDAR_READONLY
         // 予定を追加する時は Google_Service_Calendar::CALENDAR_EVENTS
