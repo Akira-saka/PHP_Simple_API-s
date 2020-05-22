@@ -4,7 +4,7 @@ require_once "vendor/autoload.php";
 
 ini_set('date.timezone', 'Asia/Tokyo');
 
-const calendar_id = "shibuuuu5@gmail.com";
+const calendar_id = "xxxxx";
 
 class Google
 {
