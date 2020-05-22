@@ -12,11 +12,11 @@ class Slack
 
     function __construct()
     {
-        $this->slack_id = "xxxxx";
-        $this->google_calender = "xxxxx";
-        $this->trello = "xxxxx";
-        $this->manaba_url = "xxxxx";
-        $this->university_name = "xxxxx";
+        $this->slack_id = "<@U01260D3HMG>";
+        $this->google_calender = "https://calendar.google.com/calendar/r";
+        $this->trello = "https://trello.com/b/x7E1lW49/%E8%87%AA%E5%88%86%E3%81%AE%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86";
+        $this->manaba_url = "https://mgu.manaba.jp/ct/home_course";
+        $this->university_name = "明治学院";
     }
 
     function getInfos()

@@ -1,9 +1,11 @@
 php notice for univ_student
 
-trello
-google calender
-twitter 気になったワード　slack
-line bot->google calender
+実装予定
+```
+trello、zoom API使用可能性あり
+twitter 指定ワード　slack通知、ニュースURLにする可能性あり
+line message apiによりgoogle calender通知
+```
 
 icon
 https://www.webfx.com/tools/emoji-cheat-sheet/
@@ -20,10 +22,10 @@ API、cronで欲しい情報を全て連携させる
 
 #Requirement
 
-*PHP 7.3.14
-*mysql  Ver 15.1 Distrib 10.3.17-MariaDB, for Linux (x86_64) using readline 5.1
-*slack webhook API
-*Google Calender API
+* PHP 7.3.14
+* mysql  Ver 15.1 Distrib 10.3.17-MariaDB, for Linux (x86_64) using readline 5.1
+* slack webhook API
+* Google Calender API
 
 etc...
 
@@ -75,8 +77,6 @@ php SlackExecute.php
 完全個人用のため、必要に応じて、ファイル内の大幅な書き換えの可能性あり。
 
 # Author
-
-作成情報を列挙する
 
 * sivchari
 * university student 🇫🇷

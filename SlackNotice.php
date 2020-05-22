@@ -10,7 +10,7 @@ class SlackNotice extends Slack
     function __construct()
     {
         parent::__construct();
-        $this->webhook_url = "xxxxx";
+        $this->webhook_url = "https://hooks.slack.com/services/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";
     }
 
     function execNotice($slack_message)
