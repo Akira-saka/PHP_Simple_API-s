@@ -1,20 +1,29 @@
 <?php
-require "Slack.php";
-require "SlackNotice.php";
 
-class SlackExecute {
+require_once "Slack.php";
+require_once "SlackNotice.php";
 
-    function __construct() {
+class SlackExecute
+{
+
+    protected $obj;
+    protected $slack_message;
+
+    function __construct()
+    {
         $this->slack = new Slack();
         $this->slackNotice = new SlackNotice();
     }
+    
 
-    function execute() {
+    function execute()
+    {
         try {
-            $slack_infos = $this->slack->slackInfos();
-            $this->slackNotice->execNotice($slack_infos);
+            $obj = $this->slack->getInfos();
+            $slack_message = $this->slack->setMessages($obj);
+            $this->slackNotice->execNotice($slack_message);
         } catch (Exception $e) {
-            echo "Faiiled!" . $e->getMessage();
+            echo "Faiiled" . $e->getMessage();
             exit();
         }
         return true;
@@ -24,4 +33,5 @@ class SlackExecute {
 $slack = new SlackExecute();
 $result = $slack->execute();
 echo $result === true ? "Slack Notice Complete!\n" : "Bad! Failed!\n";
+
 ?>

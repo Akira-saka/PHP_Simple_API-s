@@ -21,7 +21,9 @@ API、cronで欲しい情報を全て連携させる
 #Requirement
 
 *PHP 7.3.14
+*mysql  Ver 15.1 Distrib 10.3.17-MariaDB, for Linux (x86_64) using readline 5.1
 *slack webhook API
+*Google Calender API
 
 etc...
 
@@ -31,17 +33,31 @@ CentOS Linux 8.0.1905
 
 # Usage
 
-DEMOの実行方法など、"hoge"の基本的な使い方を説明する
 
 ```bash
 git clone https://github.com/siv8510/PHP_Simple_API-s.git
 cd slackbot
 
-Slack.php
+```DB
+mysql -u hoge -p
+enter your pwd
+CREATE DATABASE API;
+USE API;
+source ./create_schedules_table.sql;
+quit;
 ```
 
-function __construct
-slack_id, webhook_url, google_calender, trello, manaba_url, unibersity_nameを任意に変更
+```Slack.php
+function __constructを任意に変更
+```
+
+```QueryBuilder.php
+function __constructを変更
+```
+
+```Google.php
+const calendar_id, $my_json_keyを変更
+```
 
 ```bash
 php SlackExecute.php

@@ -1,51 +1,23 @@
 <?php
 
-class SlackNotice 
+require_once "Slack.php";
+
+class SlackNotice extends Slack
 {
     protected $slack_message;
-    protected $obj;
+    protected $webhook_url;
 
-    function setMessages($obj) {
-        $slack_message = [
-            "username" => "intermission-codingkey",
-            "text" => $obj[0] . "\n" . $obj[1] . "\n" . $obj[6],
-            "attachments" => [
-                [
-                    "color" => "good",
-                    "fields" => [
-                        [   
-                            "title" => "My Googole Calender",
-                            "value" => $obj[3],
-                        ]
-                    ]
-                ], [
-                    "color" => "warning",
-                    "fields" => [
-                        [   
-                            "title" => "My Trello",
-                            "value" => $obj[4],
-                        ]
-                    ]
-                ], [
-                    "color" => "danger",
-                    "fields" => [
-                        [   
-                            "title" => "My manaba",
-                            "value" => $obj[5],
-                        ]
-                    ]
-                ]
-            ],
-            "icon_emoji" => ":ghost:",
-        ];
-        return $slack_message;
+    function __construct()
+    {
+        parent::__construct();
+        $this->webhook_url = "https://hooks.slack.com/services/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";
     }
 
-    function execNotice($obj) {
-        $slack_message = $this->setMessages($obj);
+    function execNotice($slack_message)
+    {
         $ch = curl_init();
         $options = [
-            CURLOPT_URL => $obj[2],
+            CURLOPT_URL => $this->webhook_url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_POST => true,
