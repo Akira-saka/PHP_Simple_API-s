@@ -11,7 +11,7 @@ class QueryBuilder
     function __construct()
     {
         $this->dsn = "xxxxx";
-        $this->username = "xxxxxx";
+        $this->username = "xxxxx";
         $this->pwd = "xxxxx";
     }
 
