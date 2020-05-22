@@ -34,11 +34,14 @@ CentOS Linux 8.0.1905
 # Usage
 
 
-```bash
+bash
+```
 git clone https://github.com/siv8510/PHP_Simple_API-s.git
 cd slackbot
+```
 
-```DB
+DB
+```
 mysql -u hoge -p
 enter your pwd
 CREATE DATABASE API;
@@ -47,19 +50,23 @@ source ./create_schedules_table.sql;
 quit;
 ```
 
-```Slack.php
+Slack.php
+```
 function __constructを任意に変更
 ```
 
-```QueryBuilder.php
+QueryBuilder.php
+```
 function __constructを変更
 ```
 
-```Google.php
+Google.php
+```
 const calendar_id, $my_json_keyを変更
 ```
 
-```bash
+bash
+```
 php SlackExecute.php
 ```
 
