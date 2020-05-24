@@ -1,12 +1,14 @@
-DROP TABLE IF EXISTS schedules;
-CREATE TABLE  API.schedules (
-    id INT(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    user_id INT(11) NOT NULL,
-    plan1 VARCHAR(30),
-    plan2 VARCHAR(30),
-    plan3 VARCHAR(30),
-    plan4 VARCHAR(30),
-    plan5 VARCHAR(30),
-    created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP NULL DEFAULT NULL
-);
+CREATE TABLE `schedules` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `plan1` varchar(30) DEFAULT NULL,
+  `plan2` varchar(30) DEFAULT NULL,
+  `plan3` varchar(30) DEFAULT NULL,
+  `plan4` varchar(30) DEFAULT NULL,
+  `plan5` varchar(30) DEFAULT NULL,
+  `delete_flag` int(11) unsigned NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

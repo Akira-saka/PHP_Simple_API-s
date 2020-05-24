@@ -3,7 +3,7 @@
 class Slack 
 {
     protected $slack_id;
-    protected $google_calendero;
+    protected $google_calender;
     protected $trello;
     protected $manabaa;
     protected $university_name;
@@ -12,7 +12,7 @@ class Slack
 
     function __construct()
     {
-        $this->slack_id = "xxxxx>";
+        $this->slack_id = "xxxxx";
         $this->google_calender = "xxxxx";
         $this->trello = "xxxxx";
         $this->manaba_url = "xxxxx";
@@ -38,7 +38,7 @@ class Slack
     {
         $slack_message = [
             "username" => "slack-intermission-codingkey",
-            "text" => "Slack通知：チェックURL:\n" . $this->slack_id,
+            "text" => "Slack通知：チェックURL:\n<@" . $this->slack_id . ">",
             "attachments" => [
                 [
                     "color" => "good",
