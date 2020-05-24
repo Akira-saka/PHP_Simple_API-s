@@ -1,7 +1,7 @@
 <?php
 
 require_once "Google.php";
-require_once "../Slack/SlackNotice.php";
+require_once __DIR__ . "/../Slack/SlackNotice.php";
 
 ini_set('date.timezone', 'Asia/Tokyo');
 

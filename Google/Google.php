@@ -1,10 +1,10 @@
 <?php
 
-require_once "../vendor/autoload.php";
+require_once __DIR__ . "/../vendor/autoload.php";
 
 ini_set('date.timezone', 'Asia/Tokyo');
 
-const calendar_id = "xxxxx";
+const calendar_id = "shibuuuu5@gmail.com";
 
 class Google
 {
@@ -22,7 +22,7 @@ class Google
 
     function createService()
     {
-        $my_json_key = "xxxxx";
+        $my_json_key = "../xxxxx";
         $this->client->setApplicationName('カレンダー操作テスト イベントの取得');
         // 予定を取得する時は Google_Service_Calendar::CALENDAR_READONLY
         // 予定を追加する時は Google_Service_Calendar::CALENDAR_EVENTS
