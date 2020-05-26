@@ -5,7 +5,7 @@ require_once __DIR__ . "/../Slack/SlackNotice.php";
 
 ini_set('date.timezone', 'Asia/Tokyo');
 
-class GoogleExecute extends Slack
+class GoogleExecute
 {
 
     protected $schedules;
@@ -13,7 +13,6 @@ class GoogleExecute extends Slack
 
     function __construct()
     {
-        parent::__construct();
         $this->google = new Google();
         $this->slackNotice = new SlackNotice();
     }
@@ -23,22 +22,22 @@ class GoogleExecute extends Slack
 
         try {
             $schedules = $this->google->getSchedules();
-            $value = "";
+            $msg_val = "";
 
             foreach ($schedules as $schedule) {
-                $value .= date("Y年m月d日 H時i分", strtotime($schedule->start->dateTime)) . "から" . date("Y年m月d日 H時i分", strtotime($schedule->end->dateTime)) . "まで\n" . $schedule->summary . "です。\n" . $schedule->htmlLink . "\n";
+                $msg_val .= date("Y年m月d日 H時i分", strtotime($schedule->start->dateTime)) . "から" . date("Y年m月d日 H時i分", strtotime($schedule->end->dateTime)) . "まで\n" . $schedule->summary . "です。\n" . $schedule->htmlLink . "\n";
             }
 
             $slack_message = [
                 "username" => "google-intermission-codingkey",
-                "text" => "直近5つのスケジュールです\n" . $this->slack_id,
+                "text" => "直近5つのスケジュールです\n" . SLACK_ID,
                 "attachments" => [
                     [
                         "color" => "good",
                         "fields" => [
                             [   
                                 "title" => date("Y-m-d"),
-                                "value" => $value,
+                                "msg_val" => $msg_val,
                             ]
                         ]
                     ]
@@ -55,8 +54,6 @@ class GoogleExecute extends Slack
 
 }
 
-$google = new GoogleExecute();
-$result = $google->sendMessages();
-echo $result === true ? "Slack Notice Complete!\n" : "Bad! Failed!\n";
-
-?>
+$oGoogleExec = new GoogleExecute();
+$send_res = $oGoogleExec->sendMessages();
+echo $send_res === true ? "Slack Notice Complete!\n" : "Bad! Failed!\n";
