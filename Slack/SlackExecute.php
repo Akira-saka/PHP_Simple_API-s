@@ -16,10 +16,10 @@ class SlackExecute
     }
     
 
-    function execute()
+    function sendMsgToSlack()
     {
         try {
-            $obj = $this->slack->getInfos();
+            $obj = $this->slack->loadArrayInfos();
             $slack_message = $this->slack->setMessages($obj);
             $this->slackNotice->execNotice($slack_message);
         } catch (Exception $e) {
@@ -30,8 +30,6 @@ class SlackExecute
     }
 }
 
-$slack = new SlackExecute();
-$result = $slack->execute();
-echo $result === true ? "Slack Notice Complete!\n" : "Bad! Failed!\n";
-
-?>
+$oSlackExec = new SlackExecute();
+$send_res = $oSlackExec->sendMsgToSlack();
+echo $send_res === true ? "Slack Notice Complete!\n" : "Bad! Failed!\n";

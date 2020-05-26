@@ -1,23 +1,16 @@
 <?php
 
-require_once "Slack.php";
+require_once __DIR__ . "/../config/common.php";
 
-class SlackNotice extends Slack
+class SlackNotice
 {
     protected $slack_message;
-    protected $webhook_url;
-
-    function __construct()
-    {
-        parent::__construct();
-        $this->webhook_url = "xxxxx";
-    }
 
     function execNotice($slack_message)
     {
         $ch = curl_init();
         $options = [
-            CURLOPT_URL => $this->webhook_url,
+            CURLOPT_URL => WEBHOOK_URL,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_POST => true,
@@ -32,4 +25,3 @@ class SlackNotice extends Slack
     }
 
 }
-?>
