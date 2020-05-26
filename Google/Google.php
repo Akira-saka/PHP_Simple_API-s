@@ -1,10 +1,9 @@
 <?php
 
 require_once __DIR__ . "/../vendor/autoload.php";
+require_once __DIR__ . "/../config/common.php";
 
 ini_set('date.timezone', 'Asia/Tokyo');
-
-const calendar_id = "xxxxx";
 
 class Google
 {
@@ -22,7 +21,7 @@ class Google
 
     function createService()
     {
-        $my_json_key = "../xxxxx";
+        $my_json_key = "../" . GOOGLE_JSON_KEY;
         $this->client->setApplicationName('カレンダー操作テスト イベントの取得');
         // 予定を取得する時は Google_Service_Calendar::CALENDAR_READONLY
         // 予定を追加する時は Google_Service_Calendar::CALENDAR_EVENTS
@@ -30,25 +29,23 @@ class Google
         // ユーザーアカウントのjsonを指定
         $this->client->setAuthConfig($my_json_key);
         // サービスオブジェクトの用意
-        $service = new Google_Service_Calendar($this->client);
-        return $service;
+        $oService = new Google_Service_Calendar($this->client);
+        return $oService;
     }
 
     function getSchedules()
     {
-        $service = $this->createService();
+        $oService = $this->createService();
         // 取得時の詳細設定
-        $options = array(
+        $config_opt = array(
             'maxResults' => 5,
             'orderBy' => 'startTime',
             'singleEvents' => true,
             'timeMin' => date('c', strtotime(date("Y-m-d\TH:i"))),
         );
-        $result = $service->events->listEvents(calendar_id, $options);
-        $schedules = $result->getItems();
+        $can_listen_on_serve = $oService->events->listEvents(GOOGLE_CALENDAR_ID, $config_opt);
+        $schedules = $can_listen_on_serve->getItems();
         return $schedules;
     }
 
 }
-
-?>

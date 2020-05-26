@@ -1,44 +1,30 @@
 <?php
 
+require_once __DIR__ . "/../config/common.php";
+
 class Slack 
 {
-    protected $slack_id;
-    protected $google_calender;
-    protected $trello;
-    protected $manabaa;
-    protected $university_name;
+    
     protected $slack_infos;
     protected $obj;
 
-    function __construct()
+    function loadArrayInfos()
     {
-        $this->slack_id = "xxxxx";
-        $this->google_calender = "xxxxx";
-        $this->trello = "xxxxx";
-        $this->manaba_url = "xxxxx";
-        $this->university_name = "xxxxx";
-    }
-
-    function getInfos()
-    {
-        $slack_id = $this->slack_id;
-        $google_calender = $this->google_calender;
-        $trello = $this->trello;
-        $manaba = $this->university_name . "\n" . $this->manaba_url;
-        $slack_infos = [
-            "slack_id" => $slack_id,
-            "google_calender" => $google_calender,
-            "trello" => $trello,
-            "manaba" => $manaba,
+        $custom_manaba_info = UNIVERSITY_NAME . "\n" . MANABA_URL;
+        $array_infos = [
+            "slack_id" => SLACK_ID,
+            "google_calender" => GOOGLE_CALENDAR_URL,
+            "trello" => TRELLO_URL,
+            "manaba" => $custom_manaba_info,
         ];
-        return $slack_infos;
+        return $array_infos;
     }
 
     function setMessages($obj)
     {
         $slack_message = [
             "username" => "slack-intermission-codingkey",
-            "text" => "Slack通知：チェックURL:\n<@" . $this->slack_id . ">",
+            "text" => "Slack通知：チェックURL:\n<@" . SLACK_ID . ">",
             "attachments" => [
                 [
                     "color" => "good",
@@ -71,5 +57,3 @@ class Slack
         return $slack_message;
     }
 }
-
-?>
