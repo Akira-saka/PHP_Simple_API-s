@@ -48,7 +48,7 @@ class QueryBuilder
         return $result;
     }
 
-    function select(object $pdo, int $id)
+    function select(object $pdo)
     {
         $stmt = $pdo->prepare(
             "SELECT
@@ -56,9 +56,8 @@ class QueryBuilder
             FROM
                 schedules
             WHERE
-                id = :id"
+                slack_id = SLACK_ID"
         );
-        $stmt->bindValue(":id", (int)$id, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch();
         if ($result) {
@@ -104,9 +103,9 @@ class QueryBuilder
         }
     }
 
-    function update(object $pdo, int $id, string $slack_id, array $obj): bool
+    function update(object $pdo, string $slack_id, array $obj): bool
     {
-	$exist_check = $this->select($pdo, $id);
+	$exist_check = $this->select($pdo);
         echo "UPDATE\n";
         $present_schedule = [
             $exist_check["schedule_1"],
@@ -137,7 +136,7 @@ class QueryBuilder
                         schedule_5 = :schedule_5,
                         updated_at = NOW()
                     WHERE
-                        id = :id"
+                        slack_id = SLACK_ID"
                 );
                 $stmt->bindValue(":slack_id", $slack_id);
                 $stmt->bindValue(":schedule_1", $obj[0]->summary);
@@ -145,7 +144,6 @@ class QueryBuilder
                 $stmt->bindValue(":schedule_3", $obj[2]->summary);
                 $stmt->bindValue(":schedule_4", $obj[3]->summary);
                 $stmt->bindValue(":schedule_5", $obj[4]->summary);
-                $stmt->bindValue(":id", (int)$id, PDO::PARAM_INT);
                 $stmt->execute();
                 return true;
             } catch (Exception | TypeError $e) {
