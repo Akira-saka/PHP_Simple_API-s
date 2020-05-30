@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 require_once __DIR__ . "/../config/common.php";
 
@@ -6,7 +7,7 @@ class SlackNotice
 {
     protected $slack_message;
 
-    function execNotice($slack_message)
+    function execNotice(array $slack_message): bool
     {
         $ch = curl_init();
         $options = [
