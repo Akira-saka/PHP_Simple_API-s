@@ -51,25 +51,10 @@ USE API;
 source ./create_schedules_table.sql;
 quit;
 ```
-
-Slack.php
+crontab
 ```
-function __constructを任意に変更
-```
-
-QueryBuilder.php
-```
-function __constructを変更
-```
-
-Google.php
-```
-const calendar_id, $my_json_keyを変更
-```
-
-bash
-```
-php SlackExecute.php
+*/5 * * * * php path/slackbot/Google/GoogleExecute.php
+0 8-20/6 * * * php path/slackbot/Slack/SlackExecute.php
 ```
 
 # Note
