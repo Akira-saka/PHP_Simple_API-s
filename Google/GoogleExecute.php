@@ -36,10 +36,9 @@ class GoogleExecute
             }
 
             $pdo = $this->pdo->connectPdo();
-            $row = $this->pdo->select($pdo, DB_ID);
-
-            if ($row) {
-                $result = $this->pdo->update($pdo, DB_ID, SLACK_ID, $schedules);
+	    $row = $this->pdo->select($pdo);
+	    if ($row) {
+                $result = $this->pdo->update($pdo, SLACK_ID, $schedules);
                 $text_msg = UPDATE_MESSAGE;
             } else {
                 $result = $this->pdo->insert($pdo, SLACK_ID, $schedules);

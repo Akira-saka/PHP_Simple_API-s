@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 require_once "Slack.php";
 require_once "SlackNotice.php";
 
@@ -16,14 +18,14 @@ class SlackExecute
     }
     
 
-    function sendMsgToSlack()
+    function sendMsgToSlack(): bool
     {
         try {
             $obj = $this->slack->loadArrayInfos();
             $slack_message = $this->slack->setMessages($obj);
             $this->slackNotice->execNotice($slack_message);
-        } catch (Exception $e) {
-            echo "Faiiled" . $e->getMessage();
+        } catch (Exception | TypeError $e) {
+            echo "Failed" . $e->getMessage() . "\n";
             exit();
         }
         return true;

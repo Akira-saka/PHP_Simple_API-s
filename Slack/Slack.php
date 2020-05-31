@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 require_once __DIR__ . "/../config/common.php";
 
 class Slack 
@@ -8,7 +10,7 @@ class Slack
     protected $slack_infos;
     protected $obj;
 
-    function loadArrayInfos()
+    function loadArrayInfos(): array
     {
         $custom_manaba_info = UNIVERSITY_NAME . "\n" . MANABA_URL;
         $array_infos = [
@@ -20,7 +22,7 @@ class Slack
         return $array_infos;
     }
 
-    function setMessages($obj)
+    function setMessages(array $obj): array
     {
         $slack_message = [
             "username" => "slack-intermission-codingkey",
