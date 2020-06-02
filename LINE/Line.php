@@ -3,7 +3,6 @@
 declare(strict_types = 1);
 
 require_once __DIR__ . "/../config/common.php";
-require_once __DIR__ . "/../Google/GoogleExecute.php";
 
 class Line
 {
@@ -24,9 +23,10 @@ class Line
       'Authorization: Bearer ' . LINE_ACCESS_TOKEN
     ));
 
-    $result = curl_exec($ch);
+    curl_exec($ch);
     curl_close($ch);
 
     return true;
   }
+
 }
