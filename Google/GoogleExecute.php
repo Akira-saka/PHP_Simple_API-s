@@ -4,8 +4,9 @@ declare(strict_types = 1);
 
 require_once "Google.php";
 require_once __DIR__ . "/../Slack/SlackNotice.php";
+require_once __DIR__ . "/../Slack/Slack.php";
 require_once __DIR__ . "/../QueryBuilder.php";
-
+require_once __DIR__ . "/../LINE/Line.php";
 require_once __DIR__ . "/../config/common.php";
 
 ini_set('date.timezone', 'Asia/Tokyo');
@@ -21,7 +22,10 @@ class GoogleExecute
     {
         $this->google = new Google();
         $this->slackNotice = new SlackNotice();
+        $this->slack = new Slack();
         $this->pdo = new QueryBuilder();
+        $this->line = new Line();
+        $this->connect= $this->pdo->connectPdo();
     }
 
     function sendMessages(): bool
@@ -35,13 +39,12 @@ class GoogleExecute
                 $msg_val .= date("Y年m月d日 H時i分", strtotime($schedule->start->dateTime)) . "から" . date("Y年m月d日 H時i分", strtotime($schedule->end->dateTime)) . "まで\n" . $schedule->summary . "です。\n" . $schedule->htmlLink . "\n";
             }
 
-            $pdo = $this->pdo->connectPdo();
-	    $row = $this->pdo->select($pdo);
-	    if ($row) {
-                $result = $this->pdo->update($pdo, SLACK_ID, $schedules);
+	        $row = $this->pdo->select($this->connect);
+	        if ($row) {
+                $result = $this->pdo->update($this->connect, SLACK_ID, $schedules);
                 $text_msg = UPDATE_MESSAGE;
             } else {
-                $result = $this->pdo->insert($pdo, SLACK_ID, $schedules);
+                $result = $this->pdo->insert($this->connect, SLACK_ID, $schedules);
                 $text_msg = INSERT_MESSAGE;
             }
 
@@ -66,6 +69,34 @@ class GoogleExecute
                 "icon_emoji" => ":sunglasses:",
             ];
             $this->slackNotice->execNotice($slack_message);
+            $this->line->sendLine($msg_val);
+        } catch (Exception | TypeError $e) {
+            echo "Faiiled" . $e->getMessage() . "\n";
+            exit();
+        }
+        return true;
+    }
+
+    function sendNotify(): bool
+    {
+        try {
+            $row = $this->pdo->select($this->connect);
+            if ($row) {
+                //DBの直近のスケジュールの開始時間
+                //次のスケジュールの時間　Y-m-d\TH:i Googleの時間format
+                $next_start_time = $row["start_time_1"];
+                $before_five_minutes = date("Y-m-d H:i:s", strtotime("-5minutes"));
+            
+                if ($next_start_time > $before_five_minutes  ) {
+                    $send_msg = $row["schedule_1"] . "の開始５分前です\n" . "頑張りましょう！";
+                    $this->line->sendLine($send_msg);
+                    $message = $this->slack->beforeFiveMsg($send_msg);
+                    $this->slackNotice->execNotice($message);
+                    $this->pdo->buildBatch($this->connect, SLACK_ID);
+                    return true;
+                }
+            }
+            return false;
         } catch (Exception | TypeError $e) {
             echo "Faiiled" . $e->getMessage() . "\n";
             exit();
@@ -76,5 +107,7 @@ class GoogleExecute
 }
 
 $oGoogleExec = new GoogleExecute();
-$send_res = $oGoogleExec->sendMessages();
-echo $send_res === true ? "Slack Notice Complete!\n" : "Failed\n";
+$slack_res = $oGoogleExec->sendMessages();
+echo $slack_res === true ? "Slack Notice Complete!\n" : "Failed\n";
+$line_res = $oGoogleExec->sendNotify();
+echo $line_res === true ? "Line Notice Complete!\n" : "No Notify\n";

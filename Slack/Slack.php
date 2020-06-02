@@ -58,4 +58,25 @@ class Slack
         ];
         return $slack_message;
     }
+
+    function beforeFiveMsg(string $message): array
+    {
+        $slack_message = [
+            "username" => "5minutes-intermission-codingkey",
+            "text" => "<@" . SLACK_ID . ">",
+            "attachments" => [
+                [
+                    "color" => "good",
+                    "fields" => [
+                        [   
+                            "title" => "Note！Before 5 minutes Notify",
+                            "value" => $message . "ファイト！\n",
+                        ]
+                    ]
+                ], 
+            ],
+            "icon_emoji" => ":fire:",
+        ];
+        return $slack_message;
+    } 
 }
