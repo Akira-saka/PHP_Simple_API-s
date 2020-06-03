@@ -89,7 +89,7 @@ class GoogleExecute
                 $before_five_minutes = date("Y-m-d H:i:s", strtotime("+5minutes"));
             
                 if (strtotime($next_start_time) < strtotime($before_five_minutes) && $row["batch_flag"] == BATCH_FALSE) {
-                    $send_msg = $row["schedule_1"] . "の開始５分前です\n" . "頑張りましょう！";
+                    $send_msg = $row["schedule_2"] . "の開始５分前です\n" . "頑張りましょう！";
                     $this->line->sendLine($send_msg);
                     $message = $this->slack->beforeFiveMsg($send_msg);
                     $this->slackNotice->execNotice($message);
