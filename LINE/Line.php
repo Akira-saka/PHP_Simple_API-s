@@ -3,7 +3,6 @@
 declare(strict_types = 1);
 
 require_once __DIR__ . "/../config/common.php";
-require_once __DIR__ . "/../Google/GoogleExecute.php";
 
 class Line
 {

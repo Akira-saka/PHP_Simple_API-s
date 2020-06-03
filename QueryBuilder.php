@@ -48,8 +48,9 @@ class QueryBuilder
             FROM
                 schedules
             WHERE
-                slack_id = SLACK_ID"
+                slack_id = :slack_id"
         );
+        $stmt->bindValue(":slack_id", SLACK_ID);
         $stmt->execute();
         $result = $stmt->fetch();
         if ($result) {
@@ -60,7 +61,7 @@ class QueryBuilder
 	}
     }
 
-    function insert(object $pdo, string $slack_id, array $obj): bool
+    function insert(object $pdo, array $obj): bool
     {
         echo "INSERT\n";
         try {
@@ -92,7 +93,7 @@ class QueryBuilder
                     :start_time_5
                 )"
             );
-            $stmt->bindValue(":slack_id", $slack_id);
+            $stmt->bindValue(":slack_id", SLACK_ID);
             $stmt->bindValue(":schedule_1", $obj[0]->summary);
             $stmt->bindValue(":start_time_1", date("Y-m-d H:i:s", strtotime($obj[0]->start->dateTime)));
             $stmt->bindValue(":schedule_2", $obj[1]->summary);
@@ -110,7 +111,7 @@ class QueryBuilder
         }
     }
 
-    function update(object $pdo, string $slack_id, array $obj): bool
+    function update(object $pdo, array $obj): bool
     {
 	$exist_check = $this->select($pdo);
         echo "UPDATE\n";
@@ -161,7 +162,7 @@ class QueryBuilder
                 $stmt->bindValue(":schedule_5", $obj[4]->summary);
                 $stmt->bindValue(":start_time_5", date("Y-m-d H:i:s", strtotime($obj[4]->start->dateTime)));
                 $stmt->bindValue(":batch_flag", BATCH_FALSE);
-                $stmt->bindValue(":slack_id", $slack_id);
+                $stmt->bindValue(":slack_id", SLACK_ID);
                 $stmt->execute();
                 return true;
             } catch (Exception | TypeError $e) {
@@ -173,7 +174,7 @@ class QueryBuilder
         }
     }
 
-    function buildBatch(object $pdo, string $slack_id): bool
+    function buildBatch(object $pdo): bool
     {
         try{
             $stmt = $pdo->prepare(
@@ -186,7 +187,7 @@ class QueryBuilder
                     slack_id = :slack_id"
             );
             $stmt->bindValue(":batch_flag", BATCH_TRUE);
-            $stmt->bindValue(":slack_id", $slack_id);
+            $stmt->bindValue(":slack_id", SLACK_ID);
             $stmt->execute();
             return true;
         } catch (Exception | TypeError $e) {
