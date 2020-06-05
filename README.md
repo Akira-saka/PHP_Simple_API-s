@@ -1,13 +1,13 @@
-php notice for univ_student
+php Mix API for My Schedule
 
 実装予定
 ```
 trello、zoom API使用可能性あり
 twitter 指定ワード　slack通知、ニュースURLにする可能性あり
-line message apiによりgoogle calender通知
 ```
 
-icon
+Slackの通知アイコンはこちらからお好きに変更できます。
+Slack.php,GoogleExecute.phpのicon-emojiを変更
 https://www.webfx.com/tools/emoji-cheat-sheet/
 
 # PHP_Simple_API's
@@ -26,8 +26,7 @@ API、cronで欲しい情報を全て連携させる
 * mysql  Ver 15.1 Distrib 10.3.17-MariaDB, for Linux (x86_64) using readline 5.1
 * slack webhook API
 * Google Calender API
-
-etc...
+* Line Message API
 
 # OS
 
@@ -59,7 +58,9 @@ crontab
 
 # Note
 
-完全個人用のため、必要に応じて、ファイル内の大幅な書き換えの可能性あり。
+完全個人用のため、人により、config/配下にcommon.phpを作成し、定数を定める必要性がある。
+現在は、大学用URL、YouTube、Trello等がある。
+APIのAccess Token系統も全てこの配下に記述。
 
 # Author
 
@@ -72,4 +73,4 @@ enjoy making your schedule!
 
 I'm glad this system makes you smile :)
  
-Thank you!
+Thx!
