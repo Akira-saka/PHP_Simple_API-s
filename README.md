@@ -38,7 +38,7 @@ CentOS Linux 8.0.1905
 bash
 ```
 git clone https://github.com/siv8510/PHP_Simple_API-s.git
-cd slackbot
+cd PHP_Simple_API-s
 ```
 
 DB
