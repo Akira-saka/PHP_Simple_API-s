@@ -52,7 +52,7 @@ quit;
 ```
 crontab
 ```
-*/5 * * * * php path/slackbot/Google/GoogleExecute.php
+* * * * * php path/slackbot/Google/GoogleExecute.php
 0 8-20/6 * * * php path/slackbot/Slack/SlackExecute.php
 ```
 
